@@ -5,7 +5,7 @@ public class Rectangulo {
     private int base;
     private int altura;
 
-    public Rectangulo(int altura, int base) {
+    public Rectangulo(int base, int altura) {
         this.altura = altura;
         this.base = base;
     }
