@@ -1,3 +1,5 @@
-es\iescanarias\tito\cristo\App.class
+es\iescanarias\tito\cristo\model\GestorFichero.class
 module-info.class
 es\iescanarias\tito\cristo\controller\PrimaryController.class
+es\iescanarias\tito\cristo\model\Rectangulo.class
+es\iescanarias\tito\cristo\App.class
