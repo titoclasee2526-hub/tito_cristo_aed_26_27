@@ -1,7 +1,7 @@
 package es.iescanarias.tito.cristo.model;
 
 public class Rectangulo {
- 
+
     private int base;
     private int altura;
 
@@ -26,9 +26,12 @@ public class Rectangulo {
         this.altura = altura;
     }
 
-    public String calcularArea(){
-        return "El area es:" + base * altura;
+    public String calcularArea() {
+        return "El area es: " + base * altura;
     }
 
-    
+    @Override
+    public String toString() {
+        return this.base + ";" + this.altura;
+    }
 }
