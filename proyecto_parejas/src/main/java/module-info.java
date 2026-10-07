@@ -4,5 +4,6 @@ module es.iescanarias.tito.cristo {
     requires jdk.incubator.vector;
 
     opens es.iescanarias.tito.cristo to javafx.fxml;
+    opens es.iescanarias.tito.cristo.controller to javafx.fxml;
     exports es.iescanarias.tito.cristo;
 }

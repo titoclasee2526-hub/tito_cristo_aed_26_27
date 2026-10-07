@@ -1,26 +1,17 @@
 package es.iescanarias.tito.cristo.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
 
+import es.iescanarias.tito.cristo.model.GestorFichero;
+import es.iescanarias.tito.cristo.model.Rectangulo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-
-
-
+import javafx.scene.control.TextField;
 
 public class PrimaryController {
 
-   
     @FXML
     private Button btnLeer;
 
@@ -28,49 +19,34 @@ public class PrimaryController {
     private Button btnguardar;
 
     @FXML
+    private TextField txtAltura;
+
+    @FXML
     private TextArea txtArea;
 
     @FXML
-    void guardar(ActionEvent event) {
+    private TextField txtBase;
 
-        String textos[] = {"en ", "un ", "lugar ", "de ", "la ", "Mancha"};
+    private final GestorFichero gestorFichero = new GestorFichero();
 
-        ArrayList<String> listaTextos = new ArrayList<>(Arrays.asList(textos));
+    @FXML
+    void guardar(ActionEvent event) throws IOException {
 
-        Path path = Paths.get("fichero.txt");
-        try (BufferedWriter bw = Files.newBufferedWriter(path,
-                StandardOpenOption.APPEND,
-                StandardOpenOption.CREATE
-        )) {
-            for( String linea: listaTextos){
-                bw.write(linea);
-                bw.newLine();
+        int base = Integer.parseInt(txtBase.getText().trim());
+        int altura = Integer.parseInt(txtAltura.getText().trim());
 
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Rectangulo r = new Rectangulo(base, altura);
+        gestorFichero.guardar(r);
+        txtArea.setText(r.calcularArea() + "\nGuardado correctamente");
 
     }
 
     @FXML
-    void leer(ActionEvent event) {
-
-        String fileName = "fichero.txt";
-        ArrayList<String> list = null;
-        try (
-                BufferedReader br  = Files.newBufferedReader(Paths.get(fileName))
-        ) {
-            String linea ="";
-            while ( ( linea = br.readLine () ) != null ) {
-                //System.out.println(linea);
-                list.add(linea);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
+    void leer(ActionEvent event) throws IOException {
+        Rectangulo r = gestorFichero.leer();
+        txtBase.setText(String.valueOf(r.getBase()));
+        txtAltura.setText(String.valueOf(r.getAltura()));
+        txtArea.setText(r.calcularArea());
 
     }
-    }
-
+}
